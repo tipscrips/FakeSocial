@@ -341,3 +341,9 @@
 .close-opened-img-box-btn:hover {
   background-color: #ecf9d6;
 }
+
+/*temp*/
+
+.temp-users-name {
+  font-size: 3.2rem;
+}

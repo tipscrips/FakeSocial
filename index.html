@@ -58,4 +58,25 @@
       <footer id="footer" class="footer"></footer>
     </div>
   </body>
+  <script>
+    async function getUserts(url) {
+      let respons = await fetch(url);
+
+      let users = await respons.json();
+
+      let str = "Copy the username and paste into the search bar: ";
+
+      for (let user of users) {
+        str += user.name + ", ";
+      }
+
+      const div = document.createElement("div");
+      div.className = "temp-users-name";
+      const contentFlow = document.getElementById("content-flow");
+      div.innerHTML = str;
+      contentFlow.append(div);
+    }
+
+    getUserts("https://jsonplaceholder.typicode.com/users");
+  </script>
 </html>
