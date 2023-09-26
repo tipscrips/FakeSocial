@@ -454,5 +454,5 @@ function createContentElement(
 }
 
 function makeSpaceBetween(str) {
-  return str;
+  return str + " ";
 }
