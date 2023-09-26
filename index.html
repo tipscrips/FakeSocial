@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/sryle.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script type="module" src="js/search.js"></script>
+    <script type="module" src="js/openImg.js"></script>
+    <script type="module" src="js/carousel.js"></script>
+    <script type="module" , src="js/renderUserProfile.js"></script>
+    <script type="module" , src="js/pressedLike.js"></script>
+    <title>Avocado</title>
+  </head>
+  <body>
+    <header id="main-header" class="main-header">
+      <h1 class="header-primary"><a href="#">Avocado</a></h1>
+      <menu id="main-menu" class="main-menu">
+        <ul id="main-menu-list" class="main-menu-list">
+          <li class="menu-list-item">
+            <a href="#" class="menu-profile-icone-item">
+              <ion-icon
+                alt="profile"
+                id="menu-profile-icon"
+                class="menu-profile-icon"
+                name="person-circle-outline"
+              ></ion-icon>
+            </a>
+          </li>
+          <li class="menu-list-item input-search">
+            <input
+              id="menu-search-value"
+              class="menu-search-value"
+              placeholder="Name: Leanne Graham"
+              type="text"
+            /><button
+              id="menu-start-searching-btn"
+              class="menu-start-searching-btn"
+            >
+              Search
+            </button>
+          </li>
+        </ul>
+      </menu>
+    </header>
+
+    <div id="main-container" class="main-container">
+      <section id="content-flow" class="content-flow"></section>
+      <footer id="footer" class="footer"></footer>
+    </div>
+  </body>
+</html>

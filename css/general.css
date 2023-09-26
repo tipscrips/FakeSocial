@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Formula 10px / 16px = 0.625 = 62.5% . 16px is default, we need to change this one to the 10px  */
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+
+  /* Doesn't work on Safari (apple) */
+  /* scroll-behavior: smooth; */
+}
+
+body {
+  position: relative;
+  font-family: sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+  overflow-x: hidden;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #555;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.error-container {
+  margin: auto;
+  text-align: center;
+}
+
+.search-error {
+  font-size: 8rem;
+}
+
+#error-num {
+  color: darkred;
+}
+
+/*
+
+main-color: #c0eb75
+shadow: #60763b , #4d5e2f , #262f17
+light: #ecf9d6 , #f2fbe3 , #f9fdf1
+
+grey-color: #555 
+*/
