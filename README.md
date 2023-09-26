@@ -4,5 +4,4 @@ Features
 
 - Search by user name
 - Like/unlike a user's photo/publication
-- Like/unlike a user's photo/publication
 - Open/close photo
