@@ -281,7 +281,7 @@ function createPhotosCarousel(user, container, photos) {
       item.thumbnailUrl
     );
 
-    photo.onerror = () => reloadImage(this);
+    photo.onerror = () => reloadImage(photo);
   }
 
   const btnNext = document.createElement("button");
