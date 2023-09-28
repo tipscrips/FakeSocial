@@ -26,5 +26,5 @@ function reloadImage(event) {
     console.log(
       `Error loading image, reloading... (attempt ${img.reloadCount})`
     );
-  }, 2000); // повторно запускаем загрузку через 5 секунд
+  }, 0); // повторно запускаем загрузку через 5 секунд
 }
