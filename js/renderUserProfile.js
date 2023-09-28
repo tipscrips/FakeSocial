@@ -414,6 +414,7 @@ function createPostZone(user, userAvatar, userPhoto, userPost, container) {
     "<ion-icon class='post-like-icon not-liked' name='heart-outline'></ion-icon>"
   );
 
+  addReloadHandlerToImages();
   return postContainer;
 }
 
@@ -457,5 +458,3 @@ function createContentElement(
 function makeSpaceBetween(str) {
   return str + " ";
 }
-
-addReloadHandlerToImages();
