@@ -22,9 +22,9 @@ function reloadImage(event) {
     img.reloadCount++;
   }
   setTimeout(() => {
-    img.src = img.src; // перезапускаем загрузку изображения
+    img.src = img.src;
     console.log(
       `Error loading image, reloading... (attempt ${img.reloadCount})`
     );
-  }, 0); // повторно запускаем загрузку через 5 секунд
+  }, 0);
 }
