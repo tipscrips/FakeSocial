@@ -104,14 +104,14 @@ async function searchUserByName(name) {
 }
 
 async function getUserData(user) {
-  const userPhotosArray = await loadUserData(
-    user.id,
-    "https://jsonplaceholder.typicode.com/photos"
+  const userPhotosArray = await await loadUserData(
+    `https://jsonplaceholder.typicode.com/albums/${user.id}/photos`
   );
+
   const userPostsArray = await loadUserData(
-    user.id,
-    "https://jsonplaceholder.typicode.com/posts"
+    `https://jsonplaceholder.typicode.com/user/${user.id}/posts`
   );
+
   const userAvatar = userPhotosArray[0];
 
   let currentUserProfile = openUserProfile(
@@ -125,18 +125,13 @@ async function getUserData(user) {
   usersProfiles.set(user.name.toLowerCase(), currentUserProfile);
 }
 
-async function loadUserData(userId, url) {
+async function loadUserData(url) {
+  let currentData;
   const respone = await fetch(url);
 
-  const data = await respone.json();
-  const userDataArray = [];
+  await respone.json().then((data) => (currentData = data));
 
-  for (let item of data) {
-    const itemId = item.albumId || item.userId;
-    if (itemId === userId) userDataArray.push(item);
-  }
-
-  return userDataArray;
+  return currentData;
 }
 
 const menuStartSearching = document.getElementById("menu-start-searching-btn");
