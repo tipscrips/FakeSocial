@@ -1,7 +1,7 @@
 export { openUserProfile };
 export { createContentElement };
 import { usersPosts } from "./cache.js";
-import { doRequest } from "./doRequest.js";
+import { reloadImage } from "./reloadImage.js";
 
 function randomizer(num = 1) {
   return Math.round(Math.random() * num);
@@ -281,7 +281,7 @@ function createPhotosCarousel(user, container, photos) {
       item.thumbnailUrl
     );
 
-    photo.onerror = (err) => console.log("Ошибка: " + err.message);
+    photo.onerror = () => reloadImage(this);
   }
 
   const btnNext = document.createElement("button");
