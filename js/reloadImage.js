@@ -5,7 +5,7 @@ function addReloadHandlerToImages(element = null) {
     element = element.onerror = reloadImage;
   } else {
     const images = document.querySelectorAll("img");
-    console.log(1);
+
     images.forEach((img) => {
       img.onerror = reloadImage;
     });
