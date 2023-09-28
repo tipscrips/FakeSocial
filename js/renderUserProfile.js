@@ -1,7 +1,7 @@
 export { openUserProfile };
 export { createContentElement };
 import { usersPosts } from "./cache.js";
-import { reloadImage } from "./reloadImage.js";
+import { addReloadHandlerToImages } from "./reloadImage.js";
 
 function randomizer(num = 1) {
   return Math.round(Math.random() * num);
@@ -457,3 +457,5 @@ function createContentElement(
 function makeSpaceBetween(str) {
   return str + " ";
 }
+
+addReloadHandlerToImages();

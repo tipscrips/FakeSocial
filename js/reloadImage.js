@@ -1,7 +1,10 @@
-export { reloadImage };
-
-const images = document.querySelectorAll("img");
-images.forEach((img) => img.addEventListener("error", reloadImage));
+export { addReloadHandlerToImages };
+function addReloadHandlerToImages() {
+  const images = document.querySelectorAll("img");
+  images.forEach((img) => {
+    img.addEventListener("error", reloadImage);
+  });
+}
 
 function reloadImage(event) {
   const img = event.target;
