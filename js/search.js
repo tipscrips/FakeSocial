@@ -35,6 +35,11 @@ async function searchUserByName(name) {
   let searchedUser;
   let checkCache = false;
 
+  if (usersProfiles.size > 2) {
+    const firstKey = usersProfiles.keys().next().value; // получаем ключ первого элемента
+
+    usersProfiles.delete(firstKey);
+  }
   for (let [key, value] of usersProfiles) {
     if (key === name.toLowerCase()) {
       value.name = key;
