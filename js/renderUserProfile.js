@@ -280,8 +280,6 @@ function createPhotosCarousel(user, container, photos) {
       "user-photo-thumbnail-size",
       item.thumbnailUrl
     );
-
-    photo.onerror = () => reloadImage(photo);
   }
 
   const btnNext = document.createElement("button");
