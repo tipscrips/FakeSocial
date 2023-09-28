@@ -1,4 +1,5 @@
 import { createContentElement } from "./renderUserProfile.js";
+import { addReloadHandlerToImages } from "./reloadImage.js";
 
 document.addEventListener("click", openImg);
 document.addEventListener("click", closeImg);
@@ -41,13 +42,15 @@ function openImg(e) {
     '<ion-icon name="close-outline"></ion-icon>'
   );
 
-  createContentElement(
+  const openedImg = createContentElement(
     "img",
     openedImgBox,
     "full-size-img",
     "full-size-img",
     imgLink
   );
+
+  addReloadHandlerToImages(openedImg);
 
   const userPostRatingsBox = createContentElement(
     "div",

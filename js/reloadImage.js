@@ -1,9 +1,15 @@
 export { addReloadHandlerToImages };
-function addReloadHandlerToImages() {
-  const images = document.querySelectorAll("img");
-  images.forEach((img) => {
-    img.addEventListener("error", reloadImage);
-  });
+
+function addReloadHandlerToImages(element = null) {
+  if (element) {
+    element = element.onerror = reloadImage;
+  } else {
+    const images = document.querySelectorAll("img");
+
+    images.forEach((img) => {
+      img.addEventListener("error", reloadImage);
+    });
+  }
 }
 
 function reloadImage(event) {
