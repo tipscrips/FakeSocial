@@ -7,7 +7,7 @@ function addReloadHandlerToImages(element = null) {
     const images = document.querySelectorAll("img");
 
     images.forEach((img) => {
-      img.addEventListener("error", reloadImage);
+      img.onerror = reloadImage;
     });
   }
 }
@@ -26,5 +26,5 @@ function reloadImage(event) {
     console.log(
       `Error loading image, reloading... (attempt ${img.reloadCount})`
     );
-  }, 5000); // повторно запускаем загрузку через 5 секунд
+  }, 2000); // повторно запускаем загрузку через 5 секунд
 }
