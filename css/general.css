@@ -32,6 +32,10 @@ button:hover {
   cursor: pointer;
 }
 
+*:focus {
+  outline: 1px solid #ffd700;
+}
+
 .error-container {
   margin: auto;
   text-align: center;

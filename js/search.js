@@ -140,6 +140,15 @@ async function loadUserData(url) {
 }
 
 const menuStartSearching = document.getElementById("menu-start-searching-btn");
+const menuInputStartSearchingByEnter =
+  document.getElementById("menu-search-value");
+
+menuInputStartSearchingByEnter.onkeydown = async function (e) {
+  if (e.code === "Enter") {
+    e.preventDefault(); // отменяем стандартное поведение браузера
+    menuStartSearching.click(); // симулируем нажатие на кнопку поиска
+  }
+};
 
 menuStartSearching.onclick = async function (e) {
   e.preventDefault();
