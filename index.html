@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/sryle.css" />
+    <link rel="stylesheet" href="css/query.css" />
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -57,7 +58,11 @@
     </header>
 
     <div id="main-container" class="main-container">
-      <section id="content-flow" class="content-flow"></section>
+      <section id="content-flow" class="content-flow">
+        <div class="temp-users-name">
+          <p>Copy the username and paste into the search bar:</p>
+        </div>
+      </section>
       <footer id="footer" class="footer"></footer>
     </div>
   </body>
@@ -67,17 +72,18 @@
 
       let users = await respons.json();
 
-      let str = "Copy the username and paste into the search bar: ";
+      const ul = document.createElement("ul");
 
       for (let user of users) {
-        str += user.name + ", ";
+        const li = document.createElement("li");
+
+        li.innerText = user.name;
+        ul.append(li);
       }
 
-      const div = document.createElement("div");
-      div.className = "temp-users-name";
-      const contentFlow = document.getElementById("content-flow");
-      div.innerHTML = str;
-      contentFlow.append(div);
+      const contentFlow = document.querySelector(".temp-users-name");
+
+      contentFlow.append(ul);
     }
 
     getUserts("https://jsonplaceholder.typicode.com/users");

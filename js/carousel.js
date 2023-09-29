@@ -1,5 +1,5 @@
-let width = 128; // ширина картинки
-let count = 4; // видимое количество изображений
+let width;
+let count = 4;
 let position = 0;
 
 const mainContainer = document.getElementById("main-container");
@@ -16,6 +16,8 @@ function checkElem(e) {
   const carousel = element.closest(".carousel");
   const ul = carousel.querySelector(".img-carousel-ul");
   const listItem = ul.querySelectorAll(".photo-list-item");
+  const img = document.querySelector(".user-photo-thumbnail-size");
+  width = img.offsetWidth + 8;
 
   if (element.classList.contains("prev")) {
     prev(ul, listItem);
@@ -29,18 +31,13 @@ function checkElem(e) {
 }
 
 function prev(ul, listItems) {
-  // сдвиг влево
   position += width * count;
-  // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
   position = Math.min(position, 0);
   ul.style.marginLeft = position + "px";
 }
 
 function next(ul, listItems) {
-  // сдвиг вправо
   position -= width * count;
-  // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
-
   position = Math.max(position, -width * (listItems.length - count));
   ul.style.marginLeft = position + "px";
 }

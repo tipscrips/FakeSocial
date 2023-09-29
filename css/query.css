@@ -1,0 +1,63 @@
+@media (max-width: 57em) {
+  .main-container {
+    width: 74.5rem;
+    box-shadow: none;
+  }
+
+  .user-profile-main-container {
+    display: block;
+    margin: auto;
+  }
+
+  .user-media-zone-container {
+    padding: 0 2.4rem;
+  }
+}
+
+@media (max-width: 44em) {
+  html {
+    font-size: 44.2%;
+  }
+
+  .main-container {
+    padding: 0;
+  }
+
+  .user-profile-main-container {
+    margin: auto;
+  }
+
+  .user-carousel {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 28em) {
+  .user-carousel {
+    font-size: 44.5%;
+  }
+  .description-box {
+    padding: 0;
+  }
+
+  .user-media-zone-container {
+    margin-bottom: 1.2rem;
+  }
+
+  .description-text-box {
+    padding: 1.2rem;
+  }
+
+  .user-posts-zone-cintainer {
+    margin: auto;
+  }
+
+  .user-post-container {
+    margin: 0;
+    width: 100vw;
+  }
+
+  .user-carousel {
+    margin-bottom: 2.4rem;
+  }
+}

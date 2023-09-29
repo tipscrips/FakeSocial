@@ -86,20 +86,14 @@
 /* USER */
 
 .user-profile-main-container {
-  display: flex;
-  gap: 3.2rem;
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  column-gap: 3.2rem;
 }
 
-.img-box {
+.user-media-zone-container {
   justify-self: center;
-  grid-row: -1 / 1;
-}
-
-.description-box {
-  display: flex;
-  flex-direction: column;
-
-  padding: 2.4rem;
+  grid-row: 1 / 3;
 }
 
 .user-avatar-thumbnail-size {
@@ -107,6 +101,13 @@
   height: 12rem;
 
   border-radius: 50%;
+}
+
+.description-box {
+  display: flex;
+  flex-direction: column;
+
+  padding: 2.4rem;
 }
 
 .user-name {
@@ -117,7 +118,7 @@
 
 .user-login {
   font-size: 1.2rem;
-
+  display: block;
   margin-bottom: 1.8rem;
 }
 
@@ -138,7 +139,7 @@
 .user-carousel {
   display: flex;
   align-items: center;
-  padding: 0.8rem 3.2rem;
+  padding: 0.8rem 3.6rem;
   border-radius: 3px;
 
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.07);
@@ -165,7 +166,6 @@
 
 .user-photo-thumbnail-size {
   width: 12rem;
-  height: 12rem;
 }
 
 .arrow-btn {
@@ -357,5 +357,18 @@
 /*temp*/
 
 .temp-users-name {
-  font-size: 3.2rem;
+  width: 50rem;
+  font-size: 3.6rem;
+  margin: 3.2rem;
+}
+
+.temp-users-name p {
+  margin-bottom: 2.3rem;
+}
+
+.temp-users-name ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  list-style: none;
 }

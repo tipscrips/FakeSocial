@@ -39,7 +39,7 @@ function openUserProfile(cachedUser, user, userAvatar, userPhotos, userPosts) {
         userAvatar,
         doUserPhotos,
         userPost,
-        userProfileContainer.querySelector(".user-information-zone-container")
+        userProfileContainer.querySelector(".user-posts-zone-container")
       );
     }
   }
@@ -55,27 +55,38 @@ function createInformationZone(user, avatarImg, photos, container) {
     "user-profile-main-container"
   );
 
-  const mediaDiv = createContentElement(
+  const mainUserMediaDiv = createContentElement(
     "div",
     userProfileDiv,
     "user-media-zone-container",
     "user-media-zone-container"
   );
 
-  const informDiv = createContentElement(
-    "div",
-    userProfileDiv,
-    "user-information-zone-container",
-    "user-information-zone-container"
-  );
-
-  const imgBox = createContentElement("div", mediaDiv, "img-box", "img-box");
-
   const descriptionBox = createContentElement(
     "div",
-    informDiv,
+    userProfileDiv,
     "description-box",
     "description-box"
+  );
+  const descriptionTextBox = createContentElement(
+    "div",
+    descriptionBox,
+    "description-text-box",
+    "description-text-box"
+  );
+
+  const userPostsZone = createContentElement(
+    "div",
+    userProfileDiv,
+    "user-posts-zone-container",
+    "user-posts-zone-container"
+  );
+
+  const imgBox = createContentElement(
+    "div",
+    mainUserMediaDiv,
+    "img-box",
+    "img-box"
   );
 
   const openedAvatar = createContentElement(
@@ -98,7 +109,7 @@ function createInformationZone(user, avatarImg, photos, container) {
 
   const userName = createContentElement(
     "h4",
-    descriptionBox,
+    descriptionTextBox,
     "user-name",
     "user-name",
     null,
@@ -107,14 +118,14 @@ function createInformationZone(user, avatarImg, photos, container) {
 
   const userLogin = createContentElement(
     "span",
-    descriptionBox,
+    descriptionTextBox,
     "user-login",
     "user-login",
     null,
     "@" + user.username.toLowerCase()
   );
 
-  const address = createContactElement(user, descriptionBox, user.address);
+  const address = createContactElement(user, descriptionTextBox, user.address);
 
   const userPhotos = createPhotosCarousel(user, descriptionBox, photos);
 
