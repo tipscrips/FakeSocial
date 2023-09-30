@@ -17,20 +17,20 @@
   list-style: none;
 }
 
-.menu-profile-icon {
-  font-size: 2.8rem;
+.home-icon {
+  font-size: 2.4rem;
 }
 
-.menu-profile-icone-item:link,
-.menu-profile-icone-item:visited {
+.home-page-icone-item:link,
+.home-page-icone-item:visited {
   display: flex;
   align-items: center;
 
   color: #4d5e2f;
   transition: all 0.3s;
 }
-.menu-profile-icone-item:hover,
-.menu-profile-icone-item:active {
+.home-page-icone-item:hover,
+.home-page-icone-item:active {
   color: #262f17;
 }
 
@@ -255,7 +255,7 @@
   box-shadow: 0 0 19px 1px rgba(0, 0, 0, 0.07);
 }
 
-.user-post-img-item {
+.home-page-icone-item {
   height: 80;
   width: 80;
 }

@@ -1,5 +1,6 @@
 export { openUserProfile };
 export { createContentElement };
+export { createPostZone };
 export { randomizer };
 import { usersPosts } from "./cache.js";
 import { addReloadHandlerToImages } from "./reloadImage.js";
@@ -10,6 +11,7 @@ function randomizer(num = 1) {
 
 function openUserProfile(cachedUser, user, userAvatar, userPhotos, userPosts) {
   const container = document.getElementById("content-flow");
+  container.classList.add("user-page");
   container.innerHTML = "";
 
   if (cachedUser) {
@@ -355,7 +357,7 @@ function createPostZone(user, userAvatar, userPhoto, userPost, container) {
     "user-post-info-login",
     "user-post-info-login",
     null,
-    "@" + user.username.toLowerCase()
+    "@" + user.username
   );
 
   if (userPhoto) {

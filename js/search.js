@@ -1,4 +1,4 @@
-export { getUserData };
+export { loadUserData };
 import { openUserProfile } from "./renderUserProfile.js";
 import { usersProfiles } from "./cache.js";
 
@@ -41,6 +41,7 @@ function checkCache(username) {
 }
 
 async function searchUserByName(name) {
+  document.querySelector(".content-flow").classList.add("user-page");
   if (lastUser) {
     if (lastUser.username === name || lastUser.name === name) {
       doCache = false;
