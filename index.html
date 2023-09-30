@@ -15,6 +15,7 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+    <script type="module" src="js/homePostsPage.js"></script>
     <script type="module" src="js/search.js"></script>
     <script type="module" src="js/openImg.js"></script>
     <script type="module" src="js/carousel.js"></script>
@@ -66,26 +67,5 @@
       <footer id="footer" class="footer"></footer>
     </div>
   </body>
-  <script>
-    async function getUserts(url) {
-      let respons = await fetch(url);
-
-      let users = await respons.json();
-
-      const ul = document.createElement("ul");
-
-      for (let user of users) {
-        const li = document.createElement("li");
-
-        li.innerText = user.name;
-        ul.append(li);
-      }
-
-      const contentFlow = document.querySelector(".temp-users-name");
-
-      contentFlow.append(ul);
-    }
-
-    getUserts("https://jsonplaceholder.typicode.com/users");
-  </script>
+  <script></script>
 </html>

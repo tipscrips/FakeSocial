@@ -1,3 +1,3 @@
-export const usersProfiles = new Map();
+export const usersProfiles = new Set();
 
 export const usersPosts = new Map();

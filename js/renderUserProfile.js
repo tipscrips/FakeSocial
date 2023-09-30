@@ -1,5 +1,6 @@
 export { openUserProfile };
 export { createContentElement };
+export { randomizer };
 import { usersPosts } from "./cache.js";
 import { addReloadHandlerToImages } from "./reloadImage.js";
 
@@ -122,7 +123,7 @@ function createInformationZone(user, avatarImg, photos, container) {
     "user-login",
     "user-login",
     null,
-    "@" + user.username.toLowerCase()
+    "@" + user.username
   );
 
   const address = createContactElement(user, descriptionTextBox, user.address);

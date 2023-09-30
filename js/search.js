@@ -1,3 +1,4 @@
+export { getUserData };
 import { openUserProfile } from "./renderUserProfile.js";
 import { usersProfiles } from "./cache.js";
 
@@ -8,27 +9,17 @@ function searchError() {
     "<div id='error-container' class='error-container'><strong id='search-error' class='search-error'><p id='error-num'>404</p> user not found</strong></div>";
 }
 
-let userCounter = 0;
+//let userCounter = 0;
 let waiter = false;
 
-async function load2Users(url) {
-  const users = [];
+async function getUserByUrl(url) {
+  let user = await fetch(url)
+    .then((resp) => resp.json())
+    .catch((err) => (user = 404));
 
-  for (let i = 1; i <= 2; i++) {
-    ++userCounter;
-    const respone = await fetch(url + userCounter).catch(
-      (err) => (users = 404)
-    );
+  if (user.length === 0) return (user = 404);
 
-    if (!respone.ok) {
-      return respone.status;
-    }
-
-    const user = await respone.json().catch((err) => (users = 404));
-    users.push(user);
-  }
-
-  return users;
+  return user[0];
 }
 
 async function searchUserByName(name) {
@@ -40,40 +31,46 @@ async function searchUserByName(name) {
 
     usersProfiles.delete(firstKey);
   }
-  for (let [key, value] of usersProfiles) {
-    if (key === name.toLowerCase()) {
-      value.name = key;
-      searchedUser = value;
+
+  for (let profile of usersProfiles) {
+    if (profile.name === name) {
+      searchedUser = profile;
 
       checkCache = true;
+
+      break;
+    }
+
+    if (profile.username === name) {
+      searchedUser = profile;
+
+      checkCache = true;
+
       break;
     }
   }
 
   if (!searchedUser) {
     while (true) {
-      let users = await load2Users(
-        `https://jsonplaceholder.typicode.com/users/`
+      let user = await getUserByUrl(
+        `https://jsonplaceholder.typicode.com/users?username=${name}`
       );
 
-      if (users === 404) {
+      if (user === 404) {
+        user = await getUserByUrl(
+          `https://jsonplaceholder.typicode.com/users?name=${name}`
+        );
+      }
+
+      if (user === 404) {
         lastUser = searchedUser;
         waiter = false;
-        userCounter = 0;
         break;
       }
 
-      for (let user of users) {
-        if (user.name === name) {
-          searchedUser = user;
-          break;
-        }
-      }
+      searchedUser = user;
 
-      if (searchedUser) {
-        userCounter = 0;
-        break;
-      }
+      if (searchedUser) break;
     }
   }
 
@@ -86,7 +83,8 @@ async function searchUserByName(name) {
   }
 
   if (lastUser) {
-    if (lastUser.name.toLowerCase() === searchedUser.name.toLowerCase()) {
+    if (lastUser.username === searchedUser.username) {
+      console.log(1);
       checkCache = false;
       waiter = false;
       return;
@@ -127,7 +125,10 @@ async function getUserData(user) {
     userPostsArray
   );
 
-  usersProfiles.set(user.name.toLowerCase(), currentUserProfile);
+  currentUserProfile.name = user.name;
+  currentUserProfile.username = user.username;
+  currentUserProfile.userId = user.id;
+  usersProfiles.add(user.username, currentUserProfile);
 }
 
 async function loadUserData(url) {
