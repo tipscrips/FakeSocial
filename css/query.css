@@ -60,4 +60,8 @@
   .user-carousel {
     margin-bottom: 2.4rem;
   }
+
+  .error-container {
+    width: 100vw;
+  }
 }

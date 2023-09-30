@@ -3,97 +3,97 @@ import { openUserProfile } from "./renderUserProfile.js";
 import { usersProfiles } from "./cache.js";
 
 let lastUser = null;
+let waiter = false;
 
 function searchError() {
   document.getElementById("content-flow").innerHTML =
     "<div id='error-container' class='error-container'><strong id='search-error' class='search-error'><p id='error-num'>404</p> user not found</strong></div>";
 }
 
-//let userCounter = 0;
-let waiter = false;
-
 async function getUserByUrl(url) {
-  let user = await fetch(url)
+  let user;
+
+  user = await fetch(url)
     .then((resp) => resp.json())
-    .catch((err) => (user = 404));
+    .catch((err) => console.log(err));
 
   if (user.length === 0) return (user = 404);
 
   return user[0];
 }
 
+function checkCache(username) {
+  let foundProfile;
+
+  for (let profile of usersProfiles.keys()) {
+    if (profile.name === username) {
+      foundProfile = profile;
+      break;
+    }
+
+    if (profile.username === username) {
+      foundProfile = profile;
+      break;
+    }
+  }
+
+  return foundProfile;
+}
+
 async function searchUserByName(name) {
-  let searchedUser;
-  let checkCache = false;
-
-  if (usersProfiles.size > 2) {
-    const firstKey = usersProfiles.keys().next().value; // получаем ключ первого элемента
-
-    usersProfiles.delete(firstKey);
-  }
-
-  for (let profile of usersProfiles) {
-    if (profile.name === name) {
-      searchedUser = profile;
-
-      checkCache = true;
-
-      break;
-    }
-
-    if (profile.username === name) {
-      searchedUser = profile;
-
-      checkCache = true;
-
-      break;
-    }
-  }
-
-  if (!searchedUser) {
-    while (true) {
-      let user = await getUserByUrl(
-        `https://jsonplaceholder.typicode.com/users?username=${name}`
-      );
-
-      if (user === 404) {
-        user = await getUserByUrl(
-          `https://jsonplaceholder.typicode.com/users?name=${name}`
-        );
-      }
-
-      if (user === 404) {
-        lastUser = searchedUser;
-        waiter = false;
-        break;
-      }
-
-      searchedUser = user;
-
-      if (searchedUser) break;
-    }
-  }
-
-  if (!searchedUser) {
-    lastUser = searchedUser;
-    checkCache = false;
-    waiter = false;
-    searchError();
-    return;
-  }
-
   if (lastUser) {
-    if (lastUser.username === searchedUser.username) {
-      console.log(1);
-      checkCache = false;
+    if (lastUser.username === name || lastUser.name === name) {
+      doCache = false;
       waiter = false;
       return;
     }
   }
 
-  if (checkCache) {
+  let searchedUser;
+  let doCache = false;
+
+  if (usersProfiles.size > 1) {
+    if (usersProfiles.size > 2) {
+      const firstValue = usersProfiles.values().next().value;
+
+      usersProfiles.delete(firstValue);
+    }
+
+    searchedUser = await checkCache(name);
+
+    if (searchedUser) doCache = true;
+  }
+
+  if (!searchedUser) {
+    let user = await getUserByUrl(
+      `https://jsonplaceholder.typicode.com/users?username=${name}`
+    );
+
+    if (user === 404) {
+      user = await getUserByUrl(
+        `https://jsonplaceholder.typicode.com/users?name=${name}`
+      );
+    }
+
+    if (user === 404) {
+      lastUser = searchedUser;
+      waiter = false;
+    } else {
+      searchedUser = user;
+    }
+  }
+
+  if (!searchedUser) {
+    lastUser = searchedUser;
+    doCache = false;
+    waiter = false;
+    searchError();
+    return;
+  }
+
+  if (doCache) {
     openUserProfile(searchedUser);
-    checkCache = false;
+    doCache = false;
     waiter = false;
     lastUser = searchedUser;
     return;
@@ -102,7 +102,7 @@ async function searchUserByName(name) {
   getUserData(searchedUser);
 
   lastUser = searchedUser;
-  checkCache = false;
+  doCache = false;
   waiter = false;
 }
 
@@ -128,7 +128,7 @@ async function getUserData(user) {
   currentUserProfile.name = user.name;
   currentUserProfile.username = user.username;
   currentUserProfile.userId = user.id;
-  usersProfiles.add(user.username, currentUserProfile);
+  usersProfiles.add(currentUserProfile);
 }
 
 async function loadUserData(url) {
@@ -146,8 +146,8 @@ const menuInputStartSearchingByEnter =
 
 menuInputStartSearchingByEnter.onkeydown = async function (e) {
   if (e.code === "Enter") {
-    e.preventDefault(); // отменяем стандартное поведение браузера
-    menuStartSearching.click(); // симулируем нажатие на кнопку поиска
+    e.preventDefault();
+    menuStartSearching.click();
   }
 };
 

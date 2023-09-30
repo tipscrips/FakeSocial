@@ -37,11 +37,7 @@ button:hover {
 }
 
 .error-container {
-  margin: auto;
   text-align: center;
-}
-
-.search-error {
   font-size: 8rem;
 }
 
