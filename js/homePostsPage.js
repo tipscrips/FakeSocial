@@ -1,4 +1,5 @@
 import { loadUserData } from "./search.js";
+import { lastUser } from "./search.js";
 import { createPostZone } from "./renderUserProfile.js";
 import { createContentElement } from "./renderUserProfile.js";
 import { openUserProfile } from "./renderUserProfile.js";
@@ -26,6 +27,7 @@ async function openUser(e) {
   const userPhotosArray = e.currentTarget.photos;
   const userPostsArray = e.currentTarget.posts;
 
+  document.body.scrollIntoView();
   let currentUserProfile = await openUserProfile(
     null,
     user,
@@ -211,6 +213,7 @@ function startHomePage(e) {
 
   if (!contentFlow.classList.contains("user-page")) return;
 
+  lastUser.user = null;
   contentFlow.classList.remove("user-page");
   contentFlow.innerHTML = "";
 

@@ -1,9 +1,13 @@
 export { loadUserData };
+export { lastUser };
 import { openUserProfile } from "./renderUserProfile.js";
 import { usersProfiles } from "./cache.js";
 
-let lastUser = null;
+let lastUser = {};
+lastUser.user = null;
 let waiter = false;
+let searchedUser;
+let doCache = false;
 
 function searchError() {
   document.getElementById("content-flow").innerHTML =
@@ -42,16 +46,13 @@ function checkCache(username) {
 
 async function searchUserByName(name) {
   document.querySelector(".content-flow").classList.add("user-page");
-  if (lastUser) {
-    if (lastUser.username === name || lastUser.name === name) {
+  if (lastUser.user) {
+    if (lastUser.user.username === name || lastUser.user.name === name) {
       doCache = false;
       waiter = false;
       return;
     }
   }
-
-  let searchedUser;
-  let doCache = false;
 
   if (usersProfiles.size > 1) {
     if (usersProfiles.size > 2) {
@@ -77,7 +78,7 @@ async function searchUserByName(name) {
     }
 
     if (user === 404) {
-      lastUser = searchedUser;
+      lastUser.user = searchedUser;
       waiter = false;
     } else {
       searchedUser = user;
@@ -85,7 +86,7 @@ async function searchUserByName(name) {
   }
 
   if (!searchedUser) {
-    lastUser = searchedUser;
+    lastUser.user = searchedUser;
     doCache = false;
     waiter = false;
     searchError();
@@ -96,13 +97,13 @@ async function searchUserByName(name) {
     openUserProfile(searchedUser);
     doCache = false;
     waiter = false;
-    lastUser = searchedUser;
+    lastUser.user = searchedUser;
     return;
   }
 
   getUserData(searchedUser);
 
-  lastUser = searchedUser;
+  lastUser.user = searchedUser;
   doCache = false;
   waiter = false;
 }
