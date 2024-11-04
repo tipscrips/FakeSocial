@@ -21,5 +21,5 @@ Social Network SPA — is a simple SPA where users can like posts and view other
 
 ## Running a project locally
 1. Clone the repository:
-   master
+   ```bash
    git clone https://github.com/tipscrips/FakeSocial.git
