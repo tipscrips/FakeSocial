@@ -1,11 +1,3 @@
-# 
-
-Features
-
-- Search by user name
-- Like/unlike a user's photo/publication
-- Open/close photo
-
 # Fake social network for training how to use the function fetch
 
 ## About
@@ -18,8 +10,11 @@ Social Network SPA — is a simple SPA where users can like posts and view other
 
 ## Features
 - User profile page view
-- Likes on posts
+- Search by user name
+- Like/unlike a user's photo/publication
 - Interactive interface
+- Open/close photo
+- Users gallary in profile (swiper like)
 
 ## Demonstration
 [View demo](https://fake-social-network.netlify.app/)
